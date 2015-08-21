@@ -13,16 +13,14 @@ public class Login extends AppBasePage {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
 	private String userID;
 	private String password;
-	
 
 	public Login() {
 		// Constroi a tela
 
 		TextField<String> userIdField = new TextField<>("userID", new PropertyModel<>(this, "userID"));
-		PasswordTextField  passField = new PasswordTextField("password", new PropertyModel<>(this, "password"));
+		PasswordTextField passField = new PasswordTextField("password", new PropertyModel<>(this, "password"));
 
 		// Indica se o campo será reiniciado quando for processado.
 		passField.setResetPassword(false);
@@ -49,17 +47,29 @@ public class Login extends AppBasePage {
 			String password = getPassword();
 			System.out.println("Usuário: " + userId);
 			System.out.println("Senha: " + password);
-			
-			//Exibe WelcomePage como resposta
-			Welcome welcomePage = new Welcome(userId, Login.this);
-			setResponsePage(welcomePage);
+
+			if (authenticate(userId, password)) {
+
+				// Exibe WelcomePage como resposta
+				Welcome welcomePage = new Welcome(userId, Login.this);
+				setResponsePage(welcomePage);
+			} else {
+				System.out.println("Usuário ou Senha está incorreta!");
+			}
+
 		}
 
 	}
 
-	
-	//Getters and Setters
-	
+	public final boolean authenticate(final String username, final String password) {
+		if ("admin".equalsIgnoreCase(username) && "admin".equalsIgnoreCase(password))
+			return true;
+		else
+			return false;
+	}
+
+	// Getters and Setters
+
 	public String getUserID() {
 		return userID;
 	}
@@ -75,7 +85,5 @@ public class Login extends AppBasePage {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	
 
 }

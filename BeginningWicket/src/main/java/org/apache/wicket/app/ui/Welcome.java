@@ -20,6 +20,9 @@ public class Welcome extends WebPage {
 	public Welcome(String userID, Page prevPage) {
 		add(new Label("message", new PropertyModel<>(this, "userID")));
 		
+		System.out.println("UserID: " + userID);
+		System.out.println("prevPage: " + prevPage.getId());
+		
 		this.userID = userID;
 		this.prevPage = prevPage;
 
