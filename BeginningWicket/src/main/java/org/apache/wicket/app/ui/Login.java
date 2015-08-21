@@ -49,6 +49,11 @@ public class Login extends AppBasePage {
 			String password = getPassword();
 			System.out.println("Usuário: " + userId);
 			System.out.println("Senha: " + password);
+			
+			//Exibe WelcomePage como resposta
+			Welcome welcomePage = new Welcome();
+			welcomePage.setUserID(userId);
+			setResponsePage(welcomePage);
 		}
 
 	}
