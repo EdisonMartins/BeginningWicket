@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>User Profile</title>
+</head>
+<body>
+	<form wicket:id="userProfile">
+		User Name <input type="text" wicket:id="name" /><br /> Address<input
+			type="text" wicket:id="address" /><br /> City <input type="text"
+			wicket:id="city" /><br /> Country <select wicket:id="country">
+			<!--The markup here is for preview purposes only. Wicket
+replaces this with actual data when rendering the page -->
+			<option>India</option>
+			<option>USA</option>
+			<option>UK</option>
+		</select><br /> Pin <input type="text" wicket:id="pin" /><br />
+		<hr />
+		<input type="submit" value="Save" />
+</body>
+</html>
