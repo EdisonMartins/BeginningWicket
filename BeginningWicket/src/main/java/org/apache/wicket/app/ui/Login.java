@@ -4,6 +4,7 @@ import org.apache.wicket.app.ui.template.AppBasePage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 
 public class Login extends AppBasePage {
@@ -18,6 +19,11 @@ public class Login extends AppBasePage {
 
 	public Login() {
 		// Constroi a tela
+		
+		//FeedBack Messages
+		FeedbackPanel feedback = new FeedbackPanel("feedback");
+		
+		
 
 		TextField<String> userIdField = new TextField<>("userID", new PropertyModel<>(this, "userID"));
 		PasswordTextField passField = new PasswordTextField("password", new PropertyModel<>(this, "password"));
@@ -28,6 +34,8 @@ public class Login extends AppBasePage {
 		Form<String> form = new LoginForm("loginForm");
 		form.add(userIdField);
 		form.add(passField);
+		
+		add(feedback);
 		add(form);
 
 	}
@@ -40,6 +48,8 @@ public class Login extends AppBasePage {
 			super(id);
 		}
 
+		
+		//Implementação do listener
 		@Override
 		protected void onSubmit() {
 			System.out.println("onSubmit()");
@@ -55,6 +65,12 @@ public class Login extends AppBasePage {
 				setResponsePage(welcomePage);
 			} else {
 				System.out.println("Usuário ou Senha está incorreta!");
+				String errMsg = getLocalizer().getString("login.errors.invalidCredentials ", Login.this, "Unable to sign you in");
+				
+				//Registrando o erro
+				error(errMsg);
+				
+				
 			}
 
 		}
